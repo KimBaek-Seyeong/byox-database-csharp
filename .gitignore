@@ -3,4 +3,6 @@
 
 # Build Results
 bin/
+**/bin
 obj/
+**/obj
