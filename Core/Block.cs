@@ -6,7 +6,7 @@ namespace Core
 {
     public class Block : IBlock
     {
-        #region Variables
+        #region Variable
         readonly byte[] firstSector; // 헤더의 주소
         readonly long?[] cachedHeaderValue = new long?[5]; // 데이터 페이지의 메타데이터 등 헤더 정보
         readonly Stream stream; // DB Stream
@@ -25,7 +25,7 @@ namespace Core
         }
         #endregion
 
-        #region Constructors
+        #region Constructor
         // 생성자
         public Block(BlockStorage storage, uint id, byte[] firstSector, Stream stream)
         {

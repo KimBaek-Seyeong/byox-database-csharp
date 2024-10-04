@@ -14,7 +14,7 @@ namespace Core
         int BlockSize { get; }
 
         //Find a block by its id
-        IBlock Find(unit blockId);
+        IBlock Find(uint blockId);
 
         //Allocate new block, extend the legth of underlying storage
         IBlock CreateNew();
