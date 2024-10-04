@@ -1,3 +1,3 @@
-## byox-database-csharp
+# byox-database-csharp
 
-- https://github.com/codecrafters-io/build-your-own-x?tab=readme-ov-file#build-your-own-database
+### [Copyright (c) 2021 Nam Duong](https://github.com/codecrafters-io/build-your-own-x?tab=readme-ov-file#build-your-own-database)
