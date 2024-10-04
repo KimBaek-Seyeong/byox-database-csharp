@@ -1,8 +1,14 @@
-﻿internal class Program
+﻿using System;
+using System.Collections.Generic;
+
+namespace Application
 {
-    private static void Main(string[] args)
+    internal class Program
     {
-        Console.WriteLine("Hello, World!");
-        Console.ReadKey();
+        private static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+            Console.ReadKey();
+        }
     }
 }
