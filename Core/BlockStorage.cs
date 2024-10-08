@@ -9,6 +9,7 @@ namespace Core
         readonly int blockContentSize; //
         readonly int blockHeaderSize; //
         readonly int blockSize; //
+        readonly int unitOfWork; //
 
         //
         public int BlockContentSize
