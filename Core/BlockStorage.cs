@@ -30,7 +30,35 @@ namespace Core
         #endregion
 
         #region Constructor
-        public BlockStorage() { }
+        /*
+         * 128 bytes are determined to be a randomly specified minimum value.
+         * Therefore, if necessary, check the overall database performance and usage patterns,
+         * such as I/O efficiency and memory usage, and change those value.
+         */
+        public BlockStorage(Stream storage, int blockSize = 40960, int blockHeaderSize = 48)
+        {
+            if (storage == null)
+            {
+                throw new ArgumentNullException("storage");
+            }
+
+            if (blockHeaderSize >= blockSize)
+            {
+                throw new ArgumentException(
+                    "blockHeaderSize cannot be " + "larger than or equal " + "to " + "blockSize"
+                );
+            }
+
+            if (blockSize < 128)
+            {
+                throw new ArgumentException("blockSize too small");
+            }
+
+            this.unitOfWork = ((blockSize >= 4096) ? 4096 : 128);
+            this.blockSize = blockSize;
+            this.blockHeaderSize = blockHeaderSize;
+            this.blockContentSize = blockSize - blockHeaderSize;
+        }
         #endregion
 
         #region Method
