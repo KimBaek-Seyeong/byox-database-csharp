@@ -6,7 +6,7 @@ namespace Core
     public interface IRecordStorage
     {
         // Effectively update an recorde
-        void Update(uint recrdId, byte[] data);
+        void Update(uint recordId, byte[] data);
 
         // Grab a record's data
         byte[] Find(uint recordId);
