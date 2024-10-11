@@ -9,7 +9,7 @@ namespace Core
         void Update(uint recordId, byte[] data);
 
         // Grab a record's data
-        byte[] Find(uint recordId);
+        byte[]? Find(uint recordId);
 
         // This creates new empty record
         uint Create();
