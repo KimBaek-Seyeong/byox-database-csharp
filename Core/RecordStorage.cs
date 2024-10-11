@@ -69,6 +69,45 @@ L
                 {
                     return null;
                 }
+
+                // grab total record size and allocate corresponded memory
+                var totalRecordSize = block.GetHeader(kRecordLength);
+                if (totalRecordSize > MaxRecordSize) {
+                    throw new NotSupportedException ("Unexpected record length: " + totalRecordSize);
+                }
+
+                var data = new byte[totalRecordSize];
+                var bytesRead = 0;
+
+                // now start filling data
+                IBlock currentBlock = block;
+                while(true) {
+                    uint nextBlockId;
+
+                    using (currentBlock) {
+                        var thisBlockContentLength = currentBlock.GetHeader(kBlockContentLength);
+                        if (thisBlockContentLength > storage.BlockContentSize) {
+                            throw new InvalidDataException("Unexpected block content length: " + thisBlockContentLength);
+                        }
+
+                        // read all available content of current block
+                        currentBlock.Read (dst: data, dstOffset: bytesRead, srcOffset:0, count:(int)thisBlockContentLength);
+
+                        // update number of bytes read
+                        bytesRead += (int)thisBlockContentLength;
+
+                        // move to the next block if there is any
+                        nextBlockId = (uint)currentBlock.GetHeader (kNextBlockId);
+                        if (nextBlockId == 0) {
+                            return data;
+                        }
+                    }
+
+                    currentBlock = storage.Find(nextBlockId);
+                    if (currentBlock == null) {
+                        throw new InvalidDataException ("Block not found by id : "+ nextBlockId);
+                    }
+                }
             }
         }
 
